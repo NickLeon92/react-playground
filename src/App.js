@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import { useState, useEffect } from 'react';
 import './App.css';
+import {Button, Form, FormSelect, FormLabel} from 'react-bootstrap'
 
 function App() {
 
@@ -15,9 +16,9 @@ function App() {
     })
   },[])
   return (
-    <div className="App">
-      <label for="company">Choose a company:</label>
-      <select name="companies" id="companies">
+    <div className="App"style={{textAlign:'center'}}>
+      <FormLabel for="company">Choose a company:</FormLabel>
+      <FormSelect name="companies" id="companies" style={{width:'50%', textAlign:'center', margin:'auto'}}>
         {
           companies&&(
             companies.results.map((el) => {
@@ -26,7 +27,7 @@ function App() {
           )
         }
         
-      </select>
+      </FormSelect>
     </div>
   );
 }
