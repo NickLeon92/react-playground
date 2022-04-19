@@ -3,25 +3,30 @@ import { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
+
+  const [companies, setCompanies] = useState(null)
+
   useEffect(() => {
-    fetch(`https://api.hubapi.com/crm/v3/objects/company?hapikey=${process.env.APIKEY}&properties=name`).then(res => res.json()).then(data => console.log(data))
+    fetch(`https://sbm-hs-server.herokuapp.com/list-companies`)
+    .then(res => res.json())
+    .then(data => {
+      setCompanies(data)
+      console.log(data)
+    })
   })
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <label for="company">Choose a company:</label>
+      <select name="companies" id="companies">
+        {
+          companies&&(
+            companies.results.map((el) => {
+              return <options>{el.properties.name}</options>
+            })
+          )
+        }
+        
+      </select>
     </div>
   );
 }
