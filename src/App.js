@@ -13,7 +13,7 @@ function App() {
       setCompanies(data)
       console.log(data)
     })
-  })
+  },[])
   return (
     <div className="App">
       <label for="company">Choose a company:</label>
@@ -21,7 +21,7 @@ function App() {
         {
           companies&&(
             companies.results.map((el) => {
-              return <options>{el.properties.name}</options>
+              return <option>{el.properties.name}</option>
             })
           )
         }
